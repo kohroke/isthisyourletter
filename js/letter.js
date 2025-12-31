@@ -162,8 +162,8 @@ function getNameFromURL(){
 
 // ✅ 기본 문구(키가 없을 때)
 const DEFAULT_LETTER = [
-  "새해 복 많이 받아!",
-  "올해도 건강하고, 하고 싶은 거 많이 하자."
+  "저는 2026년에는 즐거운 일이 아주 많이 일어났으면 좋겠어요. 이걸 보는 당신도 그런 한 해가 되길...",
+  "하하"
 ];
 
 function applyLetter(){
@@ -171,7 +171,7 @@ function applyLetter(){
 
   // To. 라인 적용
   const toNameEl = document.getElementById("toName");
-  if (toNameEl) toNameEl.textContent = name || "친구";
+  if (toNameEl) toNameEl.textContent = name || "당신";
 
   // 본문 적용
   const bodyEl = document.getElementById("bodyText");
