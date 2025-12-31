@@ -280,14 +280,20 @@ body {
   inset: 0;
   display: none;
   z-index: 999;
+   pointer-events: none;
 }
 
-.modal.is-open{ display: block; }
+.modal.is-open{ display: block;
+               pointer-events: auto;}
 
 .modal__backdrop{
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.55);
+   pointer-events: none;
+}
+.modal.is-open .modal__backdrop {
+  pointer-events: auto;
 }
 
 .modal__panel{
