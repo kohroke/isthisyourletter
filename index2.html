@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>is this your letter?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/index.css" />
+</head>
+
+<body>
+  <div id="viewport">
+<div id="app">
+    
+<img class="title" src="./img/title.svg">
+
+    <!-- 말 스프라이트 -->
+    <div id="horse"></div>
+
+      <div id="nameLabel1" class="nametag1">고롱</div>
+        <div id="nameLabel2" class="nametag2">고롱</div>
+          <div id="nameLabel3" class="nametag3">고롱</div>
+
+<button id="shuffle" aria-label="편지 뽑기"></button>
+<button id="orphanLetterBtn" aria-label="주인 없는 편지"></button>
+
+
+<div id="confirmModal" class="modal" aria-hidden="true">
+  <div class="modal__backdrop"></div>
+
+    <div class="modal__panel">
+<div class="modal__lines">
+  <p class="modal__line modal__line--main">
+    <span id="pickedName" class="modal__name">OOO</span> ...?  <br> Is This Your Letter?
+  </p>
+  
+</div>
+
+
+<input id="pwInput" class="modal__input" type="password" placeholder="비밀번호 입력" autocomplete="off" />
+<p id="pwError" class="modal__error" aria-live="polite"></p>
+
+
+
+    <div class="modal__actions">
+      <button id="modalOk" class="modal__btn" type="button">Yes!!</button>
+      <button id="modalCancel" class="modal__btn modal__btn--ghost" type="button">Maybe Not..</button>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+
+<script src="./js/people.js"></script>
+<script src="./js/index.js"></script>
+
+
+</body>
+</html>
