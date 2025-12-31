@@ -211,12 +211,3 @@ orphanBtn?.addEventListener("click", () => {
 
 });
 
-function openModal(name){
-  document.body.classList.add("modal-open");
-  // ...
-}
-
-function closeModal(){
-  document.body.classList.remove("modal-open");
-  // ...
-}
