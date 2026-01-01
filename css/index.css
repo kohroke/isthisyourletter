@@ -396,3 +396,31 @@ body.modal-open{
   overflow: hidden;
   touch-action: none;
 }
+
+
+.modal__panel_2{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(86vw, 360px);           /* 이미지 기준 */
+ 
+  padding: 28px 22px;
+
+  background: url("../img/modal_bg_2.svg")  50% 50% / 100% 100% no-repeat;
+  background-color: transparent;
+
+  box-shadow: none;
+  border-radius: 0;
+}
+.modal__btn_2{
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background-color: #D42042;
+  color: #000;
+}
