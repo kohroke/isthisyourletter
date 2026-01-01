@@ -9,6 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./css/index.css" />
+
+  <meta property="og:title" content="Is This Your Letter?" />
+<meta property="og:description" content="A letter that might be meant for you." />
+<meta property="og:image" content="https://kohroke.github.io/isthisyourletter/img/isthisyourletter_og.png" />
+<meta property="og:url" content="https://kohroke.github.io/isthisyourletter/" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
 </head>
 
 <body>
@@ -55,6 +65,29 @@
 
     </div>
   </div>
+
+  <!-- ✅ 주인없는 편지: 이름 입력 모달 -->
+<div id="orphanModal" class="modal" aria-hidden="true">
+  <div class="modal__backdrop"></div>
+
+  <div class="modal__panel_2" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__lines">
+      <p id="modalTitle" class="modal__line modal__line--main">
+        Please enter<br> Your Name
+      </p>
+    </div>
+
+    <input id="orphanNameInput" class="modal__input" type="text" maxlength="10" placeholder="이름" />
+    <small id="orphanError" class="modal__error"></small>
+
+    <div class="modal__actions">
+
+      <button id="orphanGo" class="modal__btn_2" type="button">Open</button>
+      <button id="orphanCancel" class="modal__btn modal__btn--ghost" type="button">Maybe not...</button>
+      
+    </div>
+  </div>
+</div>
 
 
 
