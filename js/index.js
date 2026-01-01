@@ -101,113 +101,120 @@ shuffleBtn.addEventListener("click", () => {
 }
 
 
-// ====== 모달 요소 ======
-const modal = document.getElementById("confirmModal");
+// ====== 비번 확인 모달 ======
+const confirmModal = document.getElementById("confirmModal");
 const pickedNameEl = document.getElementById("pickedName");
 const pwInput = document.getElementById("pwInput");
 const pwError = document.getElementById("pwError");
-const modalCancel = document.getElementById("modalCancel");
-const modalOk = document.getElementById("modalOk");
-const modalBackdrop = modal?.querySelector(".modal__backdrop");
+const confirmCancel = document.getElementById("modalCancel");
+const confirmOk = document.getElementById("modalOk");
+const confirmBackdrop = confirmModal?.querySelector(".modal__backdrop");
 
 let pendingName = "";
 
-// ✅ 비밀번호 정책 (간단버전)
-
-function submitModal(){
-  const input = pwInput.value.trim();
-
-  const correctPw = NAME_PASSWORD_MAP[pendingName];
-
-  if (!correctPw){
-    pwError.textContent = "등록되지 않은 이름이에요.";
-    return;
-  }
-
-  if (input !== correctPw){
-    pwError.textContent = "비밀번호가 맞지 않아요.";
-    pwInput.focus();
-    pwInput.select();
-    return;
-  }
-
-  // ✅ 이름 + 비번 통과 → 이동
-  location.href = `letter.html?name=${encodeURIComponent(pendingName)}`;
-}
-
-
-function openModal(name){
+function openConfirmModal(name){
   pendingName = name;
-  pickedNameEl.textContent = name;
+  if (pickedNameEl) pickedNameEl.textContent = name;
 
-  pwInput.value = "";
-  pwError.textContent = "";
+  if (pwInput) pwInput.value = "";
+  if (pwError) pwError.textContent = "";
 
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-  pwInput.focus();
+  confirmModal?.classList.add("is-open");
+  confirmModal?.setAttribute("aria-hidden", "false");
+  pwInput?.focus();
 }
 
-function closeModal(){
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
+function closeConfirmModal(){
+  confirmModal?.classList.remove("is-open");
+  confirmModal?.setAttribute("aria-hidden", "true");
   pendingName = "";
 }
 
-function submitModal(){
+function submitConfirmModal(){
   if (!pendingName) {
-    pwError.textContent = "이름이 선택되지 않았어요.";
+    if (pwError) pwError.textContent = "이름이 선택되지 않았어요.";
     return;
   }
 
   const correctPw = NAME_PASSWORD_MAP[pendingName];
-
   if (!correctPw){
-    pwError.textContent = "등록되지 않은 이름이에요.";
+    if (pwError) pwError.textContent = "등록되지 않은 이름이에요.";
     return;
   }
 
-  const input = pwInput.value.trim();
-
-  if (input !== correctPw){
-    pwError.textContent = "비밀번호가 맞지 않아요.";
-    pwInput.focus();
-    pwInput.select();
+  const inputPw = (pwInput?.value || "").trim();
+  if (inputPw !== correctPw){
+    if (pwError) pwError.textContent = "비밀번호가 맞지 않아요.";
+    pwInput?.focus();
+    pwInput?.select();
     return;
   }
 
-  // ✅ 통과
   location.href = `letter.html?name=${encodeURIComponent(pendingName)}`;
 }
 
-
 // 네임태그 클릭 → 모달 열기
 nameLabels.forEach((el) => {
-  el.addEventListener("click", () => {
-    const name = el.textContent.trim();
+  el?.addEventListener("click", () => {
+    const name = (el.textContent || "").trim();
     if (!name) return;
-    openModal(name);
+    openConfirmModal(name);
   });
 });
 
 // 취소 / 배경 클릭 닫기
-modalCancel.addEventListener("click", closeModal);
-modalBackdrop?.addEventListener("click", closeModal);
+confirmCancel?.addEventListener("click", closeConfirmModal);
+confirmBackdrop?.addEventListener("click", closeConfirmModal);
 
 // 확인
-modalOk.addEventListener("click", submitModal);
+confirmOk?.addEventListener("click", submitConfirmModal);
 
 // 엔터로 확인, ESC로 닫기
-pwInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") submitModal();
-  if (e.key === "Escape") closeModal();
+pwInput?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") submitConfirmModal();
+  if (e.key === "Escape") closeConfirmModal();
 });
 
 
+// ====== 주인없는 편지 모달 ======
 const orphanBtn = document.getElementById("orphanLetterBtn");
 
-orphanBtn?.addEventListener("click", () => {
-  location.href = "letter.html";
+const orphanModal = document.getElementById("orphanModal");
+const orphanInput = document.getElementById("orphanNameInput");
+const orphanError = document.getElementById("orphanError");
+const orphanCancel = document.getElementById("orphanCancel");
+const orphanGo = document.getElementById("orphanGo");
+const orphanBackdrop = orphanModal?.querySelector(".modal__backdrop");
 
+function openOrphanModal(){
+  orphanModal?.classList.add("is-open");
+  document.body.classList.add("modal-open");
+  if (orphanError) orphanError.textContent = "";
+  if (orphanInput) orphanInput.value = "";
+  setTimeout(() => orphanInput?.focus(), 0);
+}
+
+function closeOrphanModal(){
+  orphanModal?.classList.remove("is-open");
+  document.body.classList.remove("modal-open");
+}
+
+function submitOrphanName(){
+  const name = (orphanInput?.value || "").trim();
+  if (!name){
+    if (orphanError) orphanError.textContent = "이름을 입력해줘요!";
+    orphanInput?.focus();
+    return;
+  }
+  location.href = `letter.html?name=${encodeURIComponent(name)}&mode=orphan`;
+}
+
+orphanBtn?.addEventListener("click", openOrphanModal);
+orphanCancel?.addEventListener("click", closeOrphanModal);
+orphanBackdrop?.addEventListener("click", closeOrphanModal);
+orphanGo?.addEventListener("click", submitOrphanName);
+
+orphanInput?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") submitOrphanName();
+  if (e.key === "Escape") closeOrphanModal();
 });
-
