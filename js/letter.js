@@ -198,7 +198,7 @@ function fitBodyText() {
   body.style.fontSize = "16px";
 
   let fontSize = 16;
-  const MIN_FONT = 11;
+  const MIN_FONT = 13;
 
   while (body.scrollHeight > maxHeight && fontSize > MIN_FONT) {
     fontSize -= 0.2;
